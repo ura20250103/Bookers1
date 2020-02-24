@@ -1,6 +1,53 @@
-<h1>Books</h1>
-   <% @books.each do |book| %>
-      <p>Title</p>
-      <span><%=link_to book.title, book_path(book.id) %>
-      </span>
+<header>
+    <h1 class="headline">
+      <a href="#">Books</a>
+    </h1>
+  </header>
+
+
+
+  <main class="clearfix">
+    <section class="">
+      
+            <table border="0">
+  <tr>
+
+    <th>Title</th>
+    <th>Body</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <% @books.each do |book| %>
+    <td><%= link_to book.title, book_path(book) %></td>
+    <td><%= book.body %></td>
+    <th><%= link_to "Show", book_path(book.id) %></th>
+    <th><%= link_to "Edit", edit_book_path(book.id) %></th>
+    <th><%= link_to "destroy", book_path(book.id), method: :delete, "data-confirm" => "Are you sure?" %>
+    </th>
+  </tr>
+  
+  <% end %>
+</table>
+    </section>
+
+
+   
+    <h1>New book</h1>
+<!-- form_for部分 -->
+<%= form_for(@book, url: '/books') do |f| %>
+<%= render 'layouts/error_messages', model: f.object %>
+
+    <h4>Title</h4>
+    <%= f.text_field :title %>
+ 
+    <h4>body</h4>
+    <%= f.text_area :body %>
+ 
+    <br><%= f.submit 'Create Book' %>
+ 
 <% end %>
+  </main>
+ 
+ 
